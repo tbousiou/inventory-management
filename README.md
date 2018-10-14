@@ -1,5 +1,5 @@
 # Inventory Manager
-This project aims to create a simple invetory managemenet tool for small buissness
+This project aims to create a simple inventory management tool for small business
 ## Features
 - Track assets
 - Location, categories
