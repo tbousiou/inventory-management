@@ -1,0 +1,26 @@
+{% extends "base-login.html" %}
+
+{% block content %}
+    <h1>Inventory Management</h1>
+    <form class="form-signin" action="" method="post" novalidate>
+      <img class="mb-4" src="{{ url_for('static', filename='bootstrap-solid.svg') }}" alt="" width="72" height="72">
+      <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+      {{ form.hidden_tag() }}
+      
+      {{ form.username.label(class_="sr-only") }}
+      {{ form.username(class_="form-control", placeholder="Username", autofocus=true) }}
+
+      {{ form.password.label(class_="sr-only") }}
+      {{ form.password(class_="form-control", placeholder="Password") }}
+      
+      <div class="checkbox mb-3">
+        {{ form.remember_me() }}
+        {{ form.remember_me.label }}
+      </div>
+        
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>  
+      
+    </form>
+
+{% endblock %}
