@@ -109,9 +109,21 @@
           </div>
         </nav>
 
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        
         {% block content %}{% endblock %}
 
-
+        </main>
       </div>
     </div>
 
