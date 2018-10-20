@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
+from app.models import Location
 
 @app.route('/')
 @app.route('/index')
@@ -29,3 +30,9 @@ def login():
             form.username.data, form.remember_me.data))
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/locations')
+def show():
+	locations = Location.query.all()
+	return render_template('locations.html', title='Locations', locations=locations)
