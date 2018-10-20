@@ -43,37 +43,43 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url_for('assets') }}">
                   <span data-feather="file"></span>
                   Assets
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Users
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url_for('categories') }}">
                   <span data-feather="users"></span>
                   Categories
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url_for('manufacturers') }}">
+                  <span data-feather="users"></span>
+                  Manufacturers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('departments') }}">
                   <span data-feather="bar-chart-2"></span>
                   Departments
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url_for('locations') }}">
                   <span data-feather="layers"></span>
                   Locations
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('users') }}">
+                  <span data-feather="shopping-cart"></span>
+                  Users
+                </a>
+            </li>
             </ul>
-
+            
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Saved reports</span>
               <a class="d-flex align-items-center text-muted" href="#">
