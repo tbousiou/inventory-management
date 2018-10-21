@@ -12,3 +12,7 @@ class LoginForm(FlaskForm):
 class LocationForm(FlaskForm):
     name = StringField('Username', validators=[DataRequired()])
     #submit = SubmitField('Sign In')
+
+
+class DepartmentForm(FlaskForm):
+    name = StringField('Department Name', validators=[DataRequired()])
