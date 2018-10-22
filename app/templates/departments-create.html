@@ -21,7 +21,7 @@
       <form class="form-signin" action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <div class="form-group">   
-            {{ form.name.label(class_="") }}
+            {{ form.name.label }}
             {{ form.name(class_="form-control", placeholder="Department name", autofocus=true) }}
             {% for error in form.name.errors %}
               <span style="color: red;">[{{ error }}]</span>

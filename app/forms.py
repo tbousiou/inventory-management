@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Department
 
@@ -10,8 +11,12 @@ class LoginForm(FlaskForm):
     #submit = SubmitField('Sign In')
 
 
+def department_query():
+	return Department.query
+
 class LocationForm(FlaskForm):
-    name = StringField('Username', validators=[DataRequired()])
+    name = StringField('Location name', validators=[DataRequired()])
+    department_list = QuerySelectField(query_factory=department_query, allow_blank=False, get_label='name')
     #submit = SubmitField('Sign In')
 
 

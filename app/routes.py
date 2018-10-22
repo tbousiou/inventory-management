@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
-from app.forms import LoginForm, DepartmentForm
+from app.forms import LoginForm, DepartmentForm, LocationForm
 from app.models import Asset, Location, Category, Manufacturer, Department, User
 
 @app.route('/')
@@ -44,6 +44,17 @@ def locations():
 	locations = Location.query.all()
 	return render_template('locations.html', title='Locations', locations=locations)
 
+
+@app.route('/locations/create', methods=['GET', 'POST'])
+def create_location():
+	form = LocationForm()
+	if form.validate_on_submit():
+		location = Location(name=form.name.data, department_id=form.department_list.data.id)
+		db.session.add(location)
+		db.session.commit()
+		return redirect(url_for('locations'))
+	return render_template('locations-create.html', title='Create Location', form=form)
+
 @app.route('/departments')
 def departments():
 	departments = Department.query.all()
@@ -53,7 +64,7 @@ def departments():
 def create_department():
 	form = DepartmentForm()
 	if form.validate_on_submit():
-		department = Department(name=form.name.data)
+		department = Department(name=form.name.data.strip())
 		db.session.add(department)
 		db.session.commit()
 		return redirect(url_for('departments'))
