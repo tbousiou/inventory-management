@@ -38,3 +38,6 @@ class ManufacturerForm(FlaskForm):
         manufacturer = Manufacturer.query.filter_by(name=name.data).first()
         if manufacturer is not None:
             raise ValidationError('Manufacturer alreadey exists. Please use another name.')
+
+class CategoryForm(FlaskForm):
+    name = StringField('Category Name', validators=[DataRequired()])
