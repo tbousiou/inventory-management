@@ -3,8 +3,8 @@
 {% block content %}
 
 <section style="padding: 20px"> 
-  <h2 style="display:inline-flex">Create Department</h2>
-  <a class="btn btn-primary float-right" href="{{ url_for('departments') }}">Back</a>
+  <h2 style="display:inline-flex">Create Manufacturer</h2>
+  <a class="btn btn-primary float-right" href="{{ url_for('manufacturers') }}">Back</a>
 </section> 
 
 <div class="row">
@@ -13,7 +13,7 @@
       {{ form.hidden_tag() }}
       <div class="form-group">   
           {{ form.name.label }}
-          {{ form.name(class_="form-control", placeholder="Department name", autofocus=true) }}
+          {{ form.name(class_="form-control", placeholder="Enter manufacturer name", autofocus=true) }}
           {% for error in form.name.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
