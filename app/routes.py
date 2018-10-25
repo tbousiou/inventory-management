@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
-from app.forms import LoginForm, DepartmentForm, LocationForm, ManufacturerForm, CategoryForm
+from app.forms import LoginForm, AssetForm, DepartmentForm, LocationForm, ManufacturerForm, CategoryForm
 from app.models import Asset, Location, Category, Manufacturer, Department, User
 
 @app.route('/')
@@ -37,6 +37,20 @@ def login():
 def assets():
 	assets = Asset.query.all()
 	return render_template('assets.html', title='Assets', assets=assets)
+
+
+@app.route('/assets/create', methods=['GET', 'POST'])
+def create_asset():
+	form = AssetForm()
+	form.manufacturer_id.choices = [(m.id, m.name) for m in Manufacturer.query.order_by('name')]
+	form.location_id.choices = [(l.id, l.name) for l in Location.query.order_by('name')]
+	form.category_id.choices = [(c.id, c.name) for c in Category.query.order_by('name')]
+	if form.validate_on_submit():
+		asset = Asset(model=form.model.data, manufacturer_id=form.manufacturer_id.data, location_id=form.location_id.data, category_id=form.category_id.data )
+		db.session.add(asset)
+		db.session.commit()
+		return redirect(url_for('assets'))
+	return render_template('assets-create.html', title='Create Asset', form=form)
 
 
 @app.route('/locations')
@@ -80,11 +94,11 @@ def categories():
 @app.route('/categories/create', methods=['GET', 'POST'])
 def create_category():
 	form = CategoryForm()
-	#if form.validate_on_submit():
-	#	manufacturer = Manufacturer(name=form.name.data.strip())
-	#	db.session.add(manufacturer)
-	#	db.session.commit()
-	#	return redirect(url_for('manufacturers'))
+	if form.validate_on_submit():
+		category = Category(name=form.name.data.strip())
+		db.session.add(category)
+		db.session.commit()
+		return redirect(url_for('categories'))
 	return render_template('categories-create.html', title='Create Manufacturer', form=form)
 
 @app.route('/manufacturers')

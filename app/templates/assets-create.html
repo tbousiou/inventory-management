@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section style="padding: 20px">
+  <h2 style="display:inline-flex">Create Asset</h2>
+  <a class="btn btn-primary float-right" href="{{ url_for('locations') }}">Back</a>
+</section> 
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <form class="form-signin" action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      
+      <div class="form-group">   
+          {{ form.model.label }}
+          {{ form.model(class_="form-control", placeholder="Enter model name") }}
+          {% for error in form.model.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </div>
+
+      <div class="form-group">   
+          {{ form.manufacturer_id.label }}
+          {{ form.manufacturer_id(class_="form-control") }}
+          {% for error in form.manufacturer_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </div>
+
+      <div class="form-group">   
+          {{ form.category_id.label }}
+          {{ form.category_id(class_="form-control") }}
+          {% for error in form.category_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </div>
+
+      <div class="form-group">   
+          {{ form.location_id.label }}
+          {{ form.location_id(class_="form-control") }}
+          {% for error in form.location_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+    </form>
+  </div>
+</div>
+    
+{% endblock %}
+
+
+
+

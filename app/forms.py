@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError
-from app.models import Department, Manufacturer
+from app.models import Department, Manufacturer, Category
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -10,9 +10,20 @@ class LoginForm(FlaskForm):
     #submit = SubmitField('Sign In')
 
 
+class AssetForm(FlaskForm):
+    model = StringField('Username', validators=[DataRequired()])
+    
+
+    manufacturer_id = SelectField('Manufacter', coerce=int)
+    location_id = SelectField('Location', coerce=int)
+    category_id = SelectField('Category', coerce=int)
+
+
+
+
 class LocationForm(FlaskForm):
     name = StringField('Location name', validators=[DataRequired()])
-    department_id = SelectField('Departments', coerce=int)
+    department_id = SelectField('Department', coerce=int)
     #submit = SubmitField('Sign In')
 
 
@@ -37,3 +48,9 @@ class ManufacturerForm(FlaskForm):
 
 class CategoryForm(FlaskForm):
     name = StringField('Category Name', validators=[DataRequired()])
+
+
+    def validate_name(self, name):
+        category = Category.query.filter_by(name=name.data).first()
+        if category is not None:
+            raise ValidationError('Category alreadey exists. Please use another name.')
