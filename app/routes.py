@@ -48,8 +48,9 @@ def locations():
 @app.route('/locations/create', methods=['GET', 'POST'])
 def create_location():
 	form = LocationForm()
+	form.department_id.choices = [(d.id, d.name) for d in Department.query.order_by('name')]
 	if form.validate_on_submit():
-		location = Location(name=form.name.data, department_id=form.department_list.data.id)
+		location = Location(name=form.name.data, department_id=form.department_id.data)
 		db.session.add(location)
 		db.session.commit()
 		return redirect(url_for('locations'))
